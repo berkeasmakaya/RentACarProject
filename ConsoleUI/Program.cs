@@ -1,5 +1,6 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete;
+using DataAccess.Concrete.InMemory;
 
 namespace ConsoleUI
 {
@@ -10,7 +11,7 @@ namespace ConsoleUI
 			CarManager carManager = new CarManager(new InMemoryCarDal());
             foreach (var car in carManager.GetAll())
             {
-                Console.Write(car.Description);
+                Console.Write(car.CarName);
                 Console.Write("-");
                 Console.Write(car.ModelYear);
 				Console.Write("-");
