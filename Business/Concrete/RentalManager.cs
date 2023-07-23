@@ -20,7 +20,7 @@ namespace Business.Concrete
         }
         public IResult Add(Rental rental)
 		{
-            if (rental.ReturnDate==null||rental.RentDate<rental.ReturnDate)
+            if (rental.ReturnDate==null||rental.RentDate <= rental.ReturnDate)
             {
 				_rentalDal.Add(rental);
 				return new SuccessResult();

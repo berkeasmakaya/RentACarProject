@@ -16,7 +16,7 @@ namespace ConsoleUI
 			//ColorDeleteTest();
 
 			CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine("Car Name: " + car.BrandName + " " + car.CarName + " / Color Name: " + car.ColorName + " / Daily Price: " + car.DailyPrice+"$");
             }
@@ -37,7 +37,7 @@ namespace ConsoleUI
 		private static void ColorUpdateTest()
 		{
 			ColorManager colorManager = new ColorManager(new EfColorDal());
-			foreach (var color in colorManager.GetAll())
+			foreach (var color in colorManager.GetAll().Data)
 			{
 				if (color.ColorId == 3)
 				{
@@ -51,7 +51,7 @@ namespace ConsoleUI
 		private static void CarTestInMemory()
 		{
 			CarManager carManager = new CarManager(new InMemoryCarDal());
-			foreach (var car in carManager.GetAll())
+			foreach (var car in carManager.GetAll().Data)
 			{
 				Console.Write(car.CarName);
 				Console.Write("-");
