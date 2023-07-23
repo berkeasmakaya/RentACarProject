@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Core.DataAccess.EntityFramework
 {
-	public class EfEntityRepositoryBase<TEntity, TContex>
+	public class EfEntityRepositoryBase<TEntity, TContex>:IEntityRepository<TEntity>
 		where TEntity : class,IEntity,new()
 		where TContex : DbContext,new()
 	{
@@ -42,7 +42,7 @@ namespace Core.DataAccess.EntityFramework
 			}
 		}
 
-		public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+		public List<TEntity> GetAll(Expression<Func<TEntity, bool>> ? filter = null)
 		{
 			using (TContex context = new TContex())
 			{

@@ -27,9 +27,9 @@ namespace WebAPI.Controllers
 		}
 
 		[HttpGet("getbyid")]
-		public IActionResult GetById(int brandId)
+		public IActionResult GetById(int userId)
 		{
-			var result = _userService.GetById(brandId);
+			var result = _userService.GetById(userId);
 			if (result.Success)
 			{
 				return Ok(result);
@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
 			return BadRequest(result.Message);
 		}
 
-		[HttpPut("update")]
+		[HttpPost("update")]
 		public IActionResult Update(User user)
 		{
 			var result = _userService.Update(user);
