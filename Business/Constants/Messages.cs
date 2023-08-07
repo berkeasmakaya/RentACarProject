@@ -27,5 +27,8 @@ namespace Business.Contants
 		public static string CustomerDeleted="Customer Deleted!";
 		public static string CustomersListed="Customers Listed!";
 		public static string CustomerUpdated="Customer Updated!";
+		
+		
+		public static string NumberOfImagesError = "One car has maximum 5 images!";
 	}
 }

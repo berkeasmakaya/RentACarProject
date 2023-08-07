@@ -42,6 +42,7 @@ namespace WebAPI
 
 			app.UseAuthorization();
 
+			app.UseStaticFiles();
 
 			app.MapControllers();
 
