@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,5 +31,12 @@ namespace Business.Contants
 		
 		
 		public static string NumberOfImagesError = "One car has maximum 5 images!";
+		public static string UserNotFound = "User Not Found!";
+		public static string PasswordError = "Password Error!";
+		public static string SuccessfullLogin = "Successfull Login! ";
+		public static string UserAlreadyExists = "User Already Exists! ";
+		public static string UserRegistered = "User Registered!";
+		public static string AccessTokenCreated = "Access Token Created!";
+		internal static string? AuthorizationDenied;
 	}
 }

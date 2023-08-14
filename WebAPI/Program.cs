@@ -3,8 +3,13 @@ using Autofac.Extensions.DependencyInjection;
 using Business.Abstract;
 using Business.Concrete;
 using Business.DependencyResolver.Autofac;
+using Core.Utilities.IoC;
+using Core.Utilities.Security.Encryption;
+using Core.Utilities.Security.Jwt;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WebAPI
 {
@@ -17,6 +22,22 @@ namespace WebAPI
 			// Add services to the container.
 
 			builder.Services.AddControllers();
+			var tokeOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+			builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(options =>
+				{
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						ValidateIssuer = true,
+						ValidateAudience = true,
+						ValidateLifetime = true,
+						ValidIssuer = tokeOptions.Issuer,
+						ValidAudience = tokeOptions.Audience,
+						ValidateIssuerSigningKey = true,
+						IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokeOptions.SecurityKey),
+					};
+				});
+			ServiceTool.Create(builder.Services);
 
 			// Autofac implementation for IoC 
 			builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -39,6 +60,8 @@ namespace WebAPI
 			}
 
 			app.UseHttpsRedirection();
+
+			app.UseAuthentication();
 
 			app.UseAuthorization();
 

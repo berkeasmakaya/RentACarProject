@@ -2,6 +2,7 @@
 using Business.Abstract;
 using Business.Concrete;
 using Core.Utilities.Helpers.FileHelper;
+using Core.Utilities.Security.Jwt;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using System;
@@ -38,6 +39,9 @@ namespace Business.DependencyResolver.Autofac
 			builder.RegisterType<EfCarImageDal>().As<ICarImageDal>();
 
 			builder.RegisterType<FileHelperManager>().As<IFileHelper>();
+
+			builder.RegisterType<AuthManager>().As<IAuthService>();
+			builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 		}
 	}
 }
