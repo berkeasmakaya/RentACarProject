@@ -3,6 +3,8 @@ using Autofac.Extensions.DependencyInjection;
 using Business.Abstract;
 using Business.Concrete;
 using Business.DependencyResolver.Autofac;
+using Core.DependencyResolvers;
+using Core.Extensions;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.Jwt;
@@ -37,7 +39,10 @@ namespace WebAPI
 						IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokeOptions.SecurityKey),
 					};
 				});
-			ServiceTool.Create(builder.Services);
+			builder.Services.AddDependencyResolvers(new ICoreModule[]
+			{
+				new CoreModule()
+			});
 
 			// Autofac implementation for IoC 
 			builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
